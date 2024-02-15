@@ -20,7 +20,7 @@ Spring-boot web application, hibernate, JSP + JSTL, H2
 # Launch
 ```
 mvn clean package
-mvn spring-boot
+mvn spring-boot run
 http://localhost:8080/saisie
 http://localhost:8080
 http://localhost:8080/all
