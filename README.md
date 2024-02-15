@@ -27,3 +27,5 @@ http://localhost:8080/all
 http://localhost:8080/h2-console
 ```
 
+#License
+Distributed under the GNU General Public License 3. See `LICENSE.txt` for more information.
