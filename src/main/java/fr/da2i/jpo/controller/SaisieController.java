@@ -4,15 +4,13 @@ import java.util.List;
 
 import fr.da2i.jpo.dto.SaisieInput;
 import fr.da2i.jpo.repositories.DepartementRepository;
+import fr.da2i.jpo.services.LyceeService;
 import jakarta.servlet.http.HttpServletRequest;
 
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import fr.da2i.jpo.entities.Lycee;
@@ -26,13 +24,17 @@ public class SaisieController {
 	private final DepartementRepository deptRepo;
 	private final VisiteurRepository visiteurRepository;
     private final HttpServletRequest request ;
+	private final LyceeService lyceeService;
+	private final HttpSession session;
 
-	public SaisieController(LyceeRepository lyceeRepo, DepartementRepository deptRepo, VisiteurRepository visiteurRepository, HttpServletRequest request) {
+	public SaisieController(LyceeRepository lyceeRepo, DepartementRepository deptRepo, VisiteurRepository visiteurRepository, HttpServletRequest request, LyceeService lyceeService, HttpSession session) {
 		this.lyceeRepo = lyceeRepo;
 		this.deptRepo = deptRepo;
 		this.visiteurRepository = visiteurRepository;
 		this.request = request;
-	}
+        this.lyceeService = lyceeService;
+        this.session = session;
+    }
 
 	@GetMapping("/saisie")
 	public String getSaisieForm(Model model) {
@@ -76,18 +78,35 @@ public class SaisieController {
 		model.addAttribute("lycee", new Lycee());
 		return "lyceeform";
 	}
-	
-	@PostMapping("/lycee")
-	public Object saveLycee(@Valid Lycee lycee, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) return "lyceeform";
 
-		if (lyceeRepo.findByNomAndCodepostal(lycee.getNom(), lycee.getCodepostal())==null)
-			// idealement envoyer un message s'il existe déjà
-			lyceeRepo.save(lycee);
+	@PostMapping("/lycee")
+	public Object saveLycee(Lycee input, Model model, @RequestParam(required = false) String force) {
+		Lycee similar = lyceeService.getSimilarHighSchool(input);
+		boolean nameAlreadyExists = similar != null && input.getNom().equals(similar.getNom());
+		// Si aucun nom est similaire, ou qu'on force l'ajout d'un lycée similaire
+		if (similar == null || (force != null && !nameAlreadyExists)) {
+			lyceeRepo.save(input);
+			changeSaisieLycee(input);
+			return "redirect:/saisie";
+		}
+		changeSaisieLycee(similar);
+		// Si le nom est similaire mais pas égal, on propose d'ajouter
+		if (!nameAlreadyExists) {
+			model.addAttribute("input", input);
+			model.addAttribute("similar", similar);
+			return "lyceeconfirm";
+		}
+		// Sinon on redirige sans rien ajouter ou proposer
 		return "redirect:/saisie";
 	}
 
-// REST
+	private void changeSaisieLycee(Lycee lycee) {
+		SaisieInput saisie = (SaisieInput) session.getAttribute("saisie");
+		saisie.setLycee(lycee.getLno());
+		session.setAttribute("saisie", saisie);
+	}
+
+	// REST
 	@GetMapping(value="/all", produces= MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public List<Visiteur> getAllInJSON() {

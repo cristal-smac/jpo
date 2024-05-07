@@ -1,6 +1,5 @@
 package fr.da2i.jpo.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
