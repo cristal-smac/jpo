@@ -78,17 +78,16 @@ public class SaisieController {
 	}
 
 	@GetMapping("/lycee")
-	public String getLyceeForm() {
+	public String getLyceeForm(Model model) {
+		model.addAttribute("lycee", new Lycee());
 		return "lyceeform";
 	}
 	
 	@PostMapping("/lycee")
-	public Object saveLycee(@RequestParam String nom, @RequestParam String codepostal, @RequestParam String commune, Model model) {
-		Lycee lycee = new Lycee();
-		lycee.setNom(nom);
-		lycee.setCodepostal(codepostal);
-		lycee.setCommune(commune);
-		if (lyceeRepo.findByNomAndCodepostal(nom, codepostal)==null)
+	public Object saveLycee(@Valid Lycee lycee, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) return "lyceeform";
+
+		if (lyceeRepo.findByNomAndCodepostal(lycee.getNom(), lycee.getCodepostal())==null)
 			// idealement envoyer un message s'il existe déjà
 			lyceeRepo.save(lycee);
 		return "redirect:/saisie";

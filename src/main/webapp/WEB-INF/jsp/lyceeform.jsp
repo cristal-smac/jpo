@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page pageEncoding="UTF-8" %>
 
 <!Doctype html>
@@ -15,23 +16,26 @@
 			<img src="logo-IUT-de-Lille_2022.png">  <%----  logo-ulille_black.png ----%>
 		</div>
 		<div class="d-flex justify-content-center">
-		    <form action="/lycee" method="post">
+		    <form:form action="/lycee" method="post" modelAttribute="lycee">
 				<div class="mb-2">
 					<label for="lycee">Lycée</label>
-		            <input type="text" class="form-control" id="lycee" name="nom" autofocus required>
+					<form:input type="text" path="nom" id="lycee" class="form-control" />
+					<form:errors path="nom" />
 		        </div>
 				<div class="mb-2">
 					<label for="codepostal">Code postal</label>
-		            <input type="text" class="form-control" id="codepostal" name="codepostal" maxlength=5 required>
+					<form:input type="text" path="codepostal" id="codepostal" class="form-control" />
+					<form:errors path="codepostal" />
 		        </div>
 				<div class="mb-2">
 					<label for="commune">Commune</label>
-		            <input type="text" class="form-control" id="commune" name="commune" required>
+					<form:input type="text" path="commune" id="commune" class="form-control" />
+					<form:errors path="commune" />
 		        </div>
 				<div class="d-flex justify-content-center">
 					<button type="submit" class="btn btn-primary mb-2">Enregistrer</button>
 				</div>
-		    </form>
+		    </form:form>
 		</div>
 
     </div>

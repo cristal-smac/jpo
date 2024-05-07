@@ -1,14 +1,14 @@
 package fr.da2i.jpo.entities;
 
 import java.io.Serializable;
-import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Entity
@@ -18,8 +18,14 @@ public class Lycee implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer lno;
+
+	@Pattern(regexp = "^[0-9]{5}$", message = "La saisie doit être un code postal! (ex: 59000)")
 	private String codepostal;
+
+	@NotBlank(message = "Le champ est obligatoire!")
 	private String commune;
+
+	@NotBlank(message = "Le champ est obligatoire!")
 	private String nom;
     /*
 	@OneToMany(mappedBy="lycee")
