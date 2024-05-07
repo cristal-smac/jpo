@@ -19,49 +19,48 @@
 		    <form action="saisie" method="post">
 			    <div class="mb-2">
 					<label for="prenom">Prénom</label>
-			        <input type="text" class="form-control" id="prenom" name="prenom" autofocus required>
+			        <input type="text" class="form-control" id="prenom" name="prenom" value="${saisie.prenom}" autofocus required>
 			    </div>
 			    <div class="mb-2">
 					<label for="nom">Nom</label>
-			        <input type="text" class="form-control" id="nom" name="nom" required>
+			        <input type="text" class="form-control" id="nom" name="nom" value="${saisie.nom}" required>
 			    </div>
 			    <%------------------ saisie de l'email  --------------%>
 			    <div class="mb-2">
 					<label for="email">Email</label>
-			        <input type="email" class="form-control" id="email" name="email" required>
+			        <input type="email" class="form-control" id="email" name="email" value="${saisie.email}" required>
 			    </div>
 			    <%------------------ departement IUT  --------------%>		
 			    <div class="mb-2">
 					<label for="dept">Département</label>
 			        <select class="form-select form-control" id="dept" name="dept" required>
 						<option disabled selected value> -- selectionnez le dept souhaité -- </option>
-						<option value="Chimie">Chimie</option>
-						<option value="Bio">Génie Biologique</option>
-						<option value="GEA">Gestion et Administration des Entreprises</option>
-						<option value="Info">Informatique</option>
-						<option value="GEII">Génie électrique et Informatique industrielle</option>
-						<option value="MP">Mesures Physiques</option>
-						<option value="GMP">Génie mécanique et productique</option>
-						<option value="QHS">Master QHS</option>
+						<c:forEach items="${departements}" var="lycee">
+							<option ${lycee.sigle == saisie.dept ? "selected" : ""} value="${lycee.sigle}">${lycee.libelle}</option>
+						</c:forEach>
 			        </select>
 			    </div>
 			    <%------------------ saisie du lycée  --------------%>
-				<div class="mb-2">
+				<div>
 					<label for="lycee">Lycée</label>
-					<div class="input-group">
-						<select class="form-select form-control" id="lycee" name="lycee" required>
-							<option disabled selected value> -- selectionnez votre lycée -- </option>
-							<c:forEach items="${lycees}" var="lycee">
-								<option value="${lycee.lno}">${lycee.commune} - ${lycee.nom}</option>
-							</c:forEach>
-						</select>
-						<a href="lycee" class="btn btn-secondary d-flex align-items-center">+</a>
-					</div>
+					<select class="form-select form-control" id="lycee" name="lycee" required>
+						<option disabled selected value> -- selectionnez votre lycée -- </option>
+						<c:forEach items="${lycees}" var="lycee">
+							<option ${lycee.lno == saisie.lycee ? "selected" : ""} value="${lycee.lno}">${lycee.commune} - ${lycee.nom}</option>
+						</c:forEach>
+					</select>
 				</div>
 
-				<div class="d-flex justify-content-center">
-					<button type="submit" class="btn btn-primary mb-2">S'enregistrer</button>
+				<div class="d-flex flex-column-reverse p-0 align-items-start">
+					<div class="d-flex align-self-center">
+						<input type="submit" class="btn btn-primary mb-2" value="S'enregistrer" formaction="saisie">
+					</div>
+
+					<input type="submit" class="btn btn-link p-0 text-black mb-2"
+						   value="Votre lycée n'est pas dans la liste? Ajoutez-le ici" formnovalidate formaction="saveSaisieForm"
+					/>
 				</div>
+
 		    </form>
 	    </div>
 
