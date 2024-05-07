@@ -22,20 +22,19 @@ import fr.da2i.jpo.repositories.VisiteurRepository;
 
 @Controller
 public class SaisieController {
+	private final LyceeRepository lyceeRepo;
+	private final DepartementRepository deptRepo;
+	private final VisiteurRepository visiteurRepository;
+    private final HttpServletRequest request ;
 
-	@Autowired
-	LyceeRepository lyceeRepo;
+	public SaisieController(LyceeRepository lyceeRepo, DepartementRepository deptRepo, VisiteurRepository visiteurRepository, HttpServletRequest request) {
+		this.lyceeRepo = lyceeRepo;
+		this.deptRepo = deptRepo;
+		this.visiteurRepository = visiteurRepository;
+		this.request = request;
+	}
 
-	@Autowired
-	DepartementRepository deptRepo;
-
-	@Autowired
-	VisiteurRepository visiteurRepository;
-
-    @Autowired 
-	HttpServletRequest request ;
-
-    @GetMapping("/saisie")
+	@GetMapping("/saisie")
 	public String getSaisieForm(Model model) {
 		model.addAttribute("departements", deptRepo.findAll());
 		model.addAttribute("lycees",lyceeRepo.findAllByOrderByCommune());
@@ -43,11 +42,7 @@ public class SaisieController {
 	}
 	
 	@PostMapping("/saisie")
-	public Object saveDatas(@Valid SaisieInput saisie, BindingResult bindingResult, Model model) {
-		if (bindingResult.hasErrors()) {
-			return getSaisieForm(model);
-		}
-
+	public Object saveDatas(SaisieInput saisie, Model model) {
 		Visiteur visiteur = new Visiteur();
 		visiteur.setNom(saisie.getNom());
 		visiteur.setPrenom(saisie.getPrenom());
@@ -59,7 +54,6 @@ public class SaisieController {
 		if (visiteurRepository.findByEmailAndDept(saisie.getEmail(),saisie.getDept())==null) {
 		    int vno = visiteurRepository.save(visiteur).getVno();
 		    visiteur = visiteurRepository.findById(vno).orElse(null);
-		    System.out.println(visiteur.getVno());
 			model.addAttribute("numero", vno);
 			model.addAttribute("visiteur", visiteur);
 		} else {
@@ -97,8 +91,7 @@ public class SaisieController {
 	@GetMapping(value="/all", produces= MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public List<Visiteur> getAllInJSON() {
-		List<Visiteur> l = (List<Visiteur>) visiteurRepository.findAll() ;
-		return l;
+		return (List<Visiteur>) visiteurRepository.findAll();
 	}
 
 }

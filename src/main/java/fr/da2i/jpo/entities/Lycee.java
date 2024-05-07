@@ -18,14 +18,8 @@ public class Lycee implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer lno;
-
-	@Pattern(regexp = "^[0-9]{5}$", message = "La saisie doit être un code postal! (ex: 59000)")
 	private String codepostal;
-
-	@NotBlank(message = "Le champ est obligatoire!")
 	private String commune;
-
-	@NotBlank(message = "Le champ est obligatoire!")
 	private String nom;
     /*
 	@OneToMany(mappedBy="lycee")
