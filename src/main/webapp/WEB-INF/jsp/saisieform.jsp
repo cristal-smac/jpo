@@ -16,7 +16,7 @@
 		à remplir par le futur candidat
 		</div>
 		<div class="d-flex justify-content-center">
-		    <form action="saisie" method="post" id="saisie">
+		    <form action="saisie" method="post">
 			    <div class="mb-2">
 					<label for="prenom">Prénom</label>
 			        <input type="text" class="form-control" id="prenom" name="prenom" autofocus required>
@@ -57,13 +57,14 @@
 						</select>
 						<a href="lycee" class="btn btn-secondary d-flex align-items-center">+</a>
 					</div>
+				</div>
 
+				<div class="d-flex justify-content-center">
+					<button type="submit" class="btn btn-primary mb-2">S'enregistrer</button>
 				</div>
 		    </form>
 	    </div>
-		<div class="d-flex justify-content-center">
-			<button type="submit" form="saisie" class="btn btn-primary mb-2">S'enregistrer</button>
-		</div>
+
     </div>
 </body>
 </html>

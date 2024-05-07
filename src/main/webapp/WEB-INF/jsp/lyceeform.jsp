@@ -28,11 +28,12 @@
 					<label for="commune">Commune</label>
 		            <input type="text" class="form-control" id="commune" name="commune" required>
 		        </div>
+				<div class="d-flex justify-content-center">
+					<button type="submit" class="btn btn-primary mb-2">Enregistrer</button>
+				</div>
 		    </form>
 		</div>
-		<div class="d-flex justify-content-center">
-			<button type="submit" form="lycee" class="btn btn-primary mb-2">Enregistrer</button>
-		</div>
+
     </div>
 </body>
 </html>
