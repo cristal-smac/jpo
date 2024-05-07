@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page pageEncoding="UTF-8" %>
 
 <!Doctype html>
 <html lang="en">
@@ -14,15 +15,18 @@
 			<img src="logo-IUT-de-Lille_2022.png">  <%----  logo-ulille_black.png ----%>
 		</div>
 		<div class="d-flex justify-content-center">
-		    <form action="/lycee" method="post" id="lycee">
-		        <div class="mb-2">
-		            <input type="text" class="form-control" name="nom" placeholder="Lycee" required>
+		    <form action="/lycee" method="post">
+				<div class="mb-2">
+					<label for="lycee">Lycée</label>
+		            <input type="text" class="form-control" id="lycee" name="nom" autofocus required>
 		        </div>
-		        <div class="mb-2">
-		            <input type="text" class="form-control" name="codepostal" placeholder="Code Postal" maxlength=5 required>
+				<div class="mb-2">
+					<label for="codepostal">Code postal</label>
+		            <input type="text" class="form-control" id="codepostal" name="codepostal" maxlength=5 required>
 		        </div>
-		        <div class="mb-2">
-		            <input type="text" class="form-control" name="commune" placeholder="Commune" required>
+				<div class="mb-2">
+					<label for="commune">Commune</label>
+		            <input type="text" class="form-control" id="commune" name="commune" required>
 		        </div>
 		    </form>
 		</div>

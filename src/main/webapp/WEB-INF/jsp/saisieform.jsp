@@ -18,18 +18,22 @@
 		<div class="d-flex justify-content-center">
 		    <form action="saisie" method="post" id="saisie">
 			    <div class="mb-2">
-			        <input type="text" class="form-control" name="prenom" placeholder="Prenom" required>
+					<label for="prenom">Prénom</label>
+			        <input type="text" class="form-control" id="prenom" name="prenom" autofocus required>
 			    </div>
 			    <div class="mb-2">
-			        <input type="text" class="form-control" name="nom" placeholder="Nom" required>
+					<label for="nom">Nom</label>
+			        <input type="text" class="form-control" id="nom" name="nom" required>
 			    </div>
 			    <%------------------ saisie de l'email  --------------%>
 			    <div class="mb-2">
-			        <input type="email" class="form-control" name="email" placeholder="Email" required>
+					<label for="email">Email</label>
+			        <input type="email" class="form-control" id="email" name="email" required>
 			    </div>
 			    <%------------------ departement IUT  --------------%>		
 			    <div class="mb-2">
-			        <select class="form-select form-control" name="dept" required>
+					<label for="dept">Département</label>
+			        <select class="form-select form-control" id="dept" name="dept" required>
 						<option disabled selected value> -- selectionnez le dept souhaité -- </option>
 						<option value="Chimie">Chimie</option>
 						<option value="Bio">Génie Biologique</option>
@@ -42,14 +46,18 @@
 			        </select>
 			    </div>
 			    <%------------------ saisie du lycée  --------------%>
-				<div class="input-group mb-2">
-					<select class="form-select form-control" name="lycee" required>
-						<option disabled selected value> -- selectionnez votre lycée -- </option>
-						<c:forEach items="${lycees}" var="lycee">
-							<option value="${lycee.lno}">${lycee.commune} - ${lycee.nom}</option>
-						</c:forEach>
-					</select>
-					<a href="lycee" class="btn btn-secondary">+</a>
+				<div class="mb-2">
+					<label for="lycee">Lycée</label>
+					<div class="input-group">
+						<select class="form-select form-control" id="lycee" name="lycee" required>
+							<option disabled selected value> -- selectionnez votre lycée -- </option>
+							<c:forEach items="${lycees}" var="lycee">
+								<option value="${lycee.lno}">${lycee.commune} - ${lycee.nom}</option>
+							</c:forEach>
+						</select>
+						<a href="lycee" class="btn btn-secondary d-flex align-items-center">+</a>
+					</div>
+
 				</div>
 		    </form>
 	    </div>
