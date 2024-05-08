@@ -34,7 +34,7 @@
 			<div class="mb-2">
 				<label for="dept">Département</label>
 				<select class="form-select form-control" id="dept" name="dept" required>
-					<option disabled selected value> -- selectionnez le dept souhaité -- </option>
+					<option disabled selected value> -- sélectionnez le dept souhaité -- </option>
 					<c:forEach items="${departements}" var="lycee">
 						<option ${lycee.sigle == saisie.dept ? "selected" : ""} value="${lycee.sigle}">${lycee.libelle}</option>
 					</c:forEach>
@@ -44,7 +44,7 @@
 			<div>
 				<label for="lycee">Lycée</label>
 				<select class="form-select form-control" id="lycee" name="lycee" required>
-					<option disabled selected value> -- selectionnez votre lycée -- </option>
+					<option disabled selected value> -- sélectionnez votre lycée -- </option>
 					<c:forEach items="${lycees}" var="lycee">
 						<option ${lycee.lno == saisie.lycee ? "selected" : ""} value="${lycee.lno}">${lycee.commune} - ${lycee.nom}</option>
 					</c:forEach>

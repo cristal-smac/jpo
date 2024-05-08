@@ -49,9 +49,9 @@
             <div class="row">
                 <div class="col">
                     <form action="/lycee?force" method="post">
-                        <input type="hidden" name="nom" value=${input.nom} />
-                        <input type="hidden" name="codepostal" value=${input.codepostal} />
-                        <input type="hidden" name="commune" value=${input.commune} />
+                        <input type="hidden" name="nom" value="${input.nom}" />
+                        <input type="hidden" name="codepostal" value="${input.codepostal}" />
+                        <input type="hidden" name="commune" value="${input.commune}" />
                         <input type="submit" class="btn btn-primary btn-block w-100 py-2" value="Oui" />
                     </form>
                 </div>
