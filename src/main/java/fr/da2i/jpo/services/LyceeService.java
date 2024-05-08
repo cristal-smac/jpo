@@ -17,7 +17,7 @@ public class LyceeService {
     public Lycee getSimilarHighSchool(Lycee lycee) {
         LevenshteinDistance levenshtein = LevenshteinDistance.getDefaultInstance();
         for (Lycee other: lyceeRepo.findAll()) {
-            int nameDistance = levenshtein.apply(lycee.getNom(), other.getNom());
+            int nameDistance = levenshtein.apply(lycee.getNom().toLowerCase(), other.getNom().toLowerCase());
             if (nameDistance < MIN_DIST_LEVENSHTEIN && lycee.getCodepostal().equals(other.getCodepostal())) {
                 return other;
             }
