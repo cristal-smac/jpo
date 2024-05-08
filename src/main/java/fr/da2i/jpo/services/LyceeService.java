@@ -14,6 +14,7 @@ public class LyceeService {
         this.lyceeRepo = lyceeRepo;
     }
 
+    // Retourne un lycée qui a un nom similaire, avec le même code postal
     public Lycee getSimilarHighSchool(Lycee lycee) {
         LevenshteinDistance levenshtein = LevenshteinDistance.getDefaultInstance();
         for (Lycee other: lyceeRepo.findAll()) {

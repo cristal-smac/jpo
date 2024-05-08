@@ -56,7 +56,7 @@
 					   value="S'enregistrer" formaction="saisie" />
 				<input type="submit" class="btn btn-link p-0 text-black mb-4"
 					   value="Votre lycée n'est pas dans la liste? Ajoutez-le ici"
-					   formnovalidate formaction="saveSaisieForm"
+					   formnovalidate formaction="/saisie/redirectLycee"
 				/>
 			</div>
 		</form>
