@@ -43,7 +43,7 @@ public class SaisieController {
 	}
 	
 	@PostMapping
-	public Object saveDatas(@Valid SaisieInput saisie, Model model) {
+	public Object saveDatas(@Valid SaisieInput saisie, Model model, HttpSession session) {
 		Visiteur visiteur = new Visiteur();
 		Optional<Departement> dept = deptRepo.findById(saisie.getDept());
 		visiteur.setDept(dept.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
@@ -63,7 +63,7 @@ public class SaisieController {
 			model.addAttribute("numero", 0);
 		}
 		// Quand la saisie est terminée on retire de la session le formulaire sauvegardé
-		model.addAttribute("saisie", null);
+		session.setAttribute("saisie", null);
 		return "saisieok";
 	}
 
