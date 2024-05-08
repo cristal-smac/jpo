@@ -1,13 +1,17 @@
 package fr.da2i.jpo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import fr.da2i.jpo.dto.SaisieInput;
+import fr.da2i.jpo.entities.Departement;
 import fr.da2i.jpo.repositories.DepartementRepository;
 import fr.da2i.jpo.services.LyceeService;
 import jakarta.servlet.http.HttpServletRequest;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +21,7 @@ import fr.da2i.jpo.entities.Lycee;
 import fr.da2i.jpo.entities.Visiteur;
 import fr.da2i.jpo.repositories.LyceeRepository;
 import fr.da2i.jpo.repositories.VisiteurRepository;
+import org.springframework.web.server.ResponseStatusException;
 
 @Controller
 public class SaisieController {
@@ -44,16 +49,18 @@ public class SaisieController {
 	}
 	
 	@PostMapping("/saisie")
-	public Object saveDatas(SaisieInput saisie, Model model) {
+	public Object saveDatas(@Valid SaisieInput saisie, Model model) {
 		Visiteur visiteur = new Visiteur();
+		Optional<Departement> dept = deptRepo.findById(saisie.getDept());
+		visiteur.setDept(dept.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
+		Optional<Lycee> lycee = lyceeRepo.findById(saisie.getLycee());
+		visiteur.setLycee(lycee.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
 		visiteur.setNom(saisie.getNom());
 		visiteur.setPrenom(saisie.getPrenom());
 		visiteur.setEmail(saisie.getEmail());
-		visiteur.setDept(saisie.getDept());
-		visiteur.setLycee(lyceeRepo.findByLno(saisie.getLycee()));
 		visiteur.setIp(request.getRemoteAddr());
 
-		if (visiteurRepository.findByEmailAndDept(saisie.getEmail(),saisie.getDept())==null) {
+		if (visiteurRepository.findByEmailAndDept(saisie.getEmail(),dept.get())==null) {
 		    int vno = visiteurRepository.save(visiteur).getVno();
 		    visiteur = visiteurRepository.findById(vno).orElse(null);
 			model.addAttribute("numero", vno);
@@ -80,7 +87,7 @@ public class SaisieController {
 	}
 
 	@PostMapping("/lycee")
-	public Object saveLycee(Lycee input, Model model, @RequestParam(required = false) String force) {
+	public Object saveLycee(@Valid Lycee input, Model model, @RequestParam(required = false) String force) {
 		Lycee similar = lyceeService.getSimilarHighSchool(input);
 		boolean nameAlreadyExists = similar != null && input.getNom().equals(similar.getNom());
 		// Si aucun nom est similaire, ou qu'on force l'ajout d'un lycée similaire
@@ -102,6 +109,9 @@ public class SaisieController {
 
 	private void changeSaisieLycee(Lycee lycee) {
 		SaisieInput saisie = (SaisieInput) session.getAttribute("saisie");
+		if (saisie == null) {
+			saisie = new SaisieInput();
+		}
 		saisie.setLycee(lycee.getLno());
 		session.setAttribute("saisie", saisie);
 	}

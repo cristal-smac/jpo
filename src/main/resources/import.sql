@@ -1,3 +1,12 @@
+INSERT INTO departement(sigle, libelle) VALUES ('Chimie', 'Chimie');
+INSERT INTO departement(sigle, libelle) VALUES ('Bio', 'Génie Biologique');
+INSERT INTO departement(sigle, libelle) VALUES ('GEA', 'Gestion et Administration des Entreprises');
+INSERT INTO departement(sigle, libelle) VALUES ('Info', 'Informatique');
+INSERT INTO departement(sigle, libelle) VALUES ('GEII', 'Génie électrique et Informatique industrielle');
+INSERT INTO departement(sigle, libelle) VALUES ('MP', 'Mesures Physiques');
+INSERT INTO departement(sigle, libelle) VALUES ('GMP', 'Génie mécanique et productique');
+INSERT INTO departement(sigle, libelle) VALUES ('QHS', 'Master QHS');
+
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Raymond Queneau', '59650', 'Villeneuve d''Ascq');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Saint Adrien', '59650', 'Villeneuve d''Ascq');
 
@@ -84,12 +93,3 @@ INSERT INTO lycee(nom,codepostal,commune) VALUES ('Emile Zola', '59150', 'Wattre
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Université du Littoral', '62200', 'Boulogne sur Mer');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Université d''Artois', '62000', 'Arras');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Université de Lille', '59650', 'Villeneuve d''Ascq');
-
-INSERT INTO departement(sigle, libelle) VALUES ('Chimie', 'Chimie')
-INSERT INTO departement(sigle, libelle) VALUES ('Bio', 'Génie Biologique')
-INSERT INTO departement(sigle, libelle) VALUES ('GEA', 'Gestion et Administration des Entreprises')
-INSERT INTO departement(sigle, libelle) VALUES ('Info', 'Informatique')
-INSERT INTO departement(sigle, libelle) VALUES ('GEII', 'Génie électrique et Informatique industrielle')
-INSERT INTO departement(sigle, libelle) VALUES ('MP', 'Mesures Physiques')
-INSERT INTO departement(sigle, libelle) VALUES ('GMP', 'Génie mécanique et productique')
-INSERT INTO departement(sigle, libelle) VALUES ('QHS', 'Master QHS')
