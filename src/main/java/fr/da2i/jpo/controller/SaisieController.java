@@ -1,87 +1,76 @@
 package fr.da2i.jpo.controller;
 
-import java.util.List;
+import java.util.Optional;
 
+import fr.da2i.jpo.dto.SaisieInput;
+import fr.da2i.jpo.entities.Departement;
+import fr.da2i.jpo.repositories.DepartementRepository;
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import fr.da2i.jpo.entities.Lycee;
 import fr.da2i.jpo.entities.Visiteur;
 import fr.da2i.jpo.repositories.LyceeRepository;
 import fr.da2i.jpo.repositories.VisiteurRepository;
+import org.springframework.web.server.ResponseStatusException;
 
 @Controller
+@RequestMapping("/saisie")
 public class SaisieController {
+	private final LyceeRepository lyceeRepo;
+	private final DepartementRepository deptRepo;
+	private final VisiteurRepository visiteurRepository;
+    private final HttpServletRequest request;
 
-	@Autowired
-	LyceeRepository lyceeRepo;
-	@Autowired
-	VisiteurRepository visiteurRepository;
+	public SaisieController(LyceeRepository lyceeRepo, DepartementRepository deptRepo, VisiteurRepository visiteurRepository, HttpServletRequest request) {
+		this.lyceeRepo = lyceeRepo;
+		this.deptRepo = deptRepo;
+		this.visiteurRepository = visiteurRepository;
+		this.request = request;
+    }
 
-    @Autowired 
-	HttpServletRequest request ;
-
-    @GetMapping("/saisie")
+	@GetMapping
 	public String getSaisieForm(Model model) {
+		model.addAttribute("departements", deptRepo.findAll());
 		model.addAttribute("lycees",lyceeRepo.findAllByOrderByCommune());
 		return "saisieform";
 	}
 	
-	@PostMapping("/saisie")
-	public Object saveDatas(@RequestParam String prenom, @RequestParam String nom, @RequestParam String email, @RequestParam String dept, @RequestParam int lycee, Model model) {
+	@PostMapping
+	public Object saveDatas(@Valid SaisieInput saisie, Model model, HttpSession session) {
 		Visiteur visiteur = new Visiteur();
-		visiteur.setNom(nom);
-		visiteur.setPrenom(prenom);
-		visiteur.setEmail(email);
-		visiteur.setDept(dept);
-		visiteur.setLycee(lyceeRepo.findByLno(lycee));
+		Optional<Departement> dept = deptRepo.findById(saisie.getDept());
+		visiteur.setDept(dept.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
+		Optional<Lycee> lycee = lyceeRepo.findById(saisie.getLycee());
+		visiteur.setLycee(lycee.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
+		visiteur.setNom(saisie.getNom());
+		visiteur.setPrenom(saisie.getPrenom());
+		visiteur.setEmail(saisie.getEmail());
 		visiteur.setIp(request.getRemoteAddr());
-		// if(visiteurRepository.findByIp(visiteur.getIp()) == null) {
-		int vno=0;
-		if (visiteurRepository.findByEmailAndDept(email,dept)==null) {
-		    vno = visiteurRepository.save(visiteur).getVno();
+
+		if (visiteurRepository.findByEmailAndDept(saisie.getEmail(),dept.get())==null) {
+		    int vno = visiteurRepository.save(visiteur).getVno();
 		    visiteur = visiteurRepository.findById(vno).orElse(null);
-		    System.out.println(visiteur.getVno());
 			model.addAttribute("numero", vno);
 			model.addAttribute("visiteur", visiteur);
-	}
-		else {
-		model.addAttribute("numero", 0);
+		} else {
+			model.addAttribute("numero", 0);
 		}
+		// Quand la saisie est terminée on retire de la session le formulaire sauvegardé
+		session.setAttribute("saisie", null);
 		return "saisieok";
 	}
-	
-	@GetMapping("/lycee")
-	public String getLyceeForm() {
-		return "lyceeform";
-	}
-	
-	@PostMapping("/lycee")
-	public Object saveLycee(@RequestParam String nom, @RequestParam String codepostal, @RequestParam String commune, Model model) {
-		Lycee lycee = new Lycee();
-		lycee.setNom(nom);
-		lycee.setCodepostal(codepostal);
-		lycee.setCommune(commune);
-		if (lyceeRepo.findByNomAndCodepostal(nom, codepostal)==null)
-			// idealement envoyer un message s'il existe déjà
-			lyceeRepo.save(lycee);
-		return "redirect:/saisie";
-	}
 
-// REST
-	@GetMapping(value="/all", produces= MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public List<Visiteur> getAllInJSON() {
-		List<Visiteur> l = (List<Visiteur>) visiteurRepository.findAll() ;
-		return l;
+	// Garde en mémoire le formulaire de saisie et redirige sur la page pour ajouter un lycée
+	@PostMapping("/redirectLycee")
+	public String getLyceeForm(@ModelAttribute SaisieInput saisie, HttpSession session) {
+		session.setAttribute("saisie", saisie);
+		return "redirect:/lycee";
 	}
-
 }

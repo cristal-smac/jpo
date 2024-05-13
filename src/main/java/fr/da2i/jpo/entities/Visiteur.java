@@ -14,7 +14,6 @@ import lombok.Data;
 @Entity
 @Data
 public class Visiteur implements Serializable {
-	
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +22,9 @@ public class Visiteur implements Serializable {
 	private String nom;
 	private String prenom;
     private String email;
-    private String dept;
+	@ManyToOne
+	@JoinColumn(name="sigle")
+    private Departement dept;
 	@ManyToOne
 	@JoinColumn(name="lno")
 	private Lycee lycee;
