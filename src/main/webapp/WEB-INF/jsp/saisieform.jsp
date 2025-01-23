@@ -28,7 +28,7 @@
 			<%------------------ saisie de l'email  --------------%>
 			<div class="mb-2">
 				<label for="email">Email</label>
-				<input type="email" class="form-control" id="email" name="email" value="${saisie.email}" required>
+				<input type="email" class="form-control" id="email" pattern=".+@.+\..+" name="email" value="${saisie.email}" required>
 			</div>
 			<%------------------ departement IUT  --------------%>
 			<div class="mb-2">
