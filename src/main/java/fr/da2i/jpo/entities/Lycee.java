@@ -2,11 +2,12 @@ package fr.da2i.jpo.entities;
 
 import java.io.Serializable;
 
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -22,9 +23,10 @@ public class Lycee implements Serializable {
 	@NotBlank
 	private String commune;
 	@NotBlank
+	@Length(min = 5, max = 5)
 	private String nom;
-    /*
-	@OneToMany(mappedBy="lycee")
-	private List<Visiteur> visiteurs;
-    */
+	/*
+	 * @OneToMany(mappedBy="lycee")
+	 * private List<Visiteur> visiteurs;
+	 */
 }

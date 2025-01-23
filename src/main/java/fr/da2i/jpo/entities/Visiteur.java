@@ -8,7 +8,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Entity
@@ -19,14 +21,18 @@ public class Visiteur implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer vno;
 	private String ip;
+	@NotBlank
 	private String nom;
+	@NotBlank
 	private String prenom;
-    private String email;
+	@Email(message = "Please provide a valid email address")
+	@Pattern(regexp = ".+@.+\\..+", message = "Please provide a valid email address")
+	private String email;
 	@ManyToOne
-	@JoinColumn(name="sigle")
-    private Departement dept;
+	@JoinColumn(name = "sigle")
+	private Departement dept;
 	@ManyToOne
-	@JoinColumn(name="lno")
+	@JoinColumn(name = "lno")
 	private Lycee lycee;
-	
+
 }
