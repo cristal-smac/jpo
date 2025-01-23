@@ -19,11 +19,11 @@ public class Lycee implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int lno;
 	@NotBlank
+	@Length(min = 5, max = 5)
 	private String codepostal;
 	@NotBlank
 	private String commune;
 	@NotBlank
-	@Length(min = 5, max = 5)
 	private String nom;
 	/*
 	 * @OneToMany(mappedBy="lycee")

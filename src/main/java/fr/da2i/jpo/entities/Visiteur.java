@@ -21,12 +21,8 @@ public class Visiteur implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer vno;
 	private String ip;
-	@NotBlank
 	private String nom;
-	@NotBlank
 	private String prenom;
-	@Email(message = "Please provide a valid email address")
-	@Pattern(regexp = ".+@.+\\..+", message = "Please provide a valid email address")
 	private String email;
 	@ManyToOne
 	@JoinColumn(name = "sigle")
