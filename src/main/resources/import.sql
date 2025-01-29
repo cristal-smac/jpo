@@ -1,6 +1,6 @@
 INSERT INTO departement(sigle, libelle) VALUES ('Chimie', 'Chimie');
 INSERT INTO departement(sigle, libelle) VALUES ('Bio', 'Génie Biologique');
-INSERT INTO departement(sigle, libelle) VALUES ('GEA', 'Gestion et Administration des Entreprises');
+INSERT INTO departement(sigle, libelle) VALUES ('GEA', 'Gestion des Entreprises et des Administrations');
 INSERT INTO departement(sigle, libelle) VALUES ('Info', 'Informatique');
 INSERT INTO departement(sigle, libelle) VALUES ('GEII', 'Génie électrique et Informatique industrielle');
 INSERT INTO departement(sigle, libelle) VALUES ('MP', 'Mesures Physiques');
@@ -65,6 +65,7 @@ INSERT INTO lycee(nom,codepostal,commune) VALUES ('Fenelon', '59400', 'Cambrai')
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Saint Luc', '59400', 'Cambrai');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Paul Duez', '59407', 'Cambrai');
 
+INSERT INTO lycee(nom,codepostal,commune) VALUES ('du Pays de Condé', '59163', 'Condé sur l''Escaut');
 
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Charlotte Perriand', '59242', 'Genech');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Institut Genech', '59242', 'Genech');
