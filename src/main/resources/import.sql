@@ -6,6 +6,10 @@ INSERT INTO departement(sigle, libelle) VALUES ('GEII', 'Génie électrique et I
 INSERT INTO departement(sigle, libelle) VALUES ('MP', 'Mesures Physiques');
 INSERT INTO departement(sigle, libelle) VALUES ('GMP', 'Génie mécanique et productique');
 INSERT INTO departement(sigle, libelle) VALUES ('QHS', 'Master QHS');
+INSERT INTO departement(sigle, libelle) VALUES ('MLT FI', 'Management de la logistique et des transports');
+INSERT INTO departement(sigle, libelle) VALUES ('MLT FA', 'Management de la logistique et des transports');
+
+
 
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Raymond Queneau', '59650', 'Villeneuve d''Ascq');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Saint Adrien', '59650', 'Villeneuve d''Ascq');
