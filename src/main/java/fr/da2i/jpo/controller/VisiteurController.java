@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
-@RequestMapping("/all")
 public class VisiteurController {
     private final VisiteurRepository visiteurRepository;
 
@@ -19,9 +19,16 @@ public class VisiteurController {
         this.visiteurRepository = visiteurRepository;
     }
 
-    @GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
+   
+    @GetMapping(value = "/all" , produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<Visiteur> getAllInJSON() {
         return (List<Visiteur>) visiteurRepository.findAll();
+    }
+
+    @GetMapping("/dept")
+    @ResponseBody
+    public List<Map<String, Object>> getCountByDept() {
+        return visiteurRepository.getCountByDept();
     }
 }
