@@ -59,7 +59,7 @@
 					   formnovalidate formaction="/saisie/redirectLycee"
 				/>
 			</div>
-			<p class="text-center fst-italic mt-5">Ces données seront supprimées dès la fin la campagne parcourSup 2025</p>
+			<p class="text-center fst-italic mt-5">Ces données seront supprimées dès la fin la campagne parcourSup 2026</p>
 
 		</form>
     </div>

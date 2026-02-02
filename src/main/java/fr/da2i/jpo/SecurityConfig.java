@@ -20,8 +20,8 @@ public class SecurityConfig {
                         .requestMatchers("/all").authenticated()
                         .anyRequest().permitAll())
                 .httpBasic(withDefaults())
-                .csrf(AbstractHttpConfigurer::disable)
-                .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
+                .csrf(csrf -> csrf.disable())
+                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()));
         return httpSecurity.build();
     }
 }

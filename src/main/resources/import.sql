@@ -6,6 +6,11 @@ INSERT INTO departement(sigle, libelle) VALUES ('GEII', 'Génie électrique et I
 INSERT INTO departement(sigle, libelle) VALUES ('MP', 'Mesures Physiques');
 INSERT INTO departement(sigle, libelle) VALUES ('GMP', 'Génie mécanique et productique');
 INSERT INTO departement(sigle, libelle) VALUES ('QHS', 'Master QHS');
+INSERT INTO departement(sigle, libelle) VALUES ('CS', 'Carrières Sociales');
+INSERT INTO departement(sigle, libelle) VALUES ('SD', 'Science des données');
+INSERT INTO departement(sigle, libelle) VALUES ('CJ', 'Carrières Juridiques');
+INSERT INTO departement(sigle, libelle) VALUES ('TC', 'Techniques de Commercialisation');
+INSERT INTO departement(sigle, libelle) VALUES ('InfoCom', 'Information - Communication');
 INSERT INTO departement(sigle, libelle) VALUES ('MLT FI', 'Management de la logistique et des transports');
 INSERT INTO departement(sigle, libelle) VALUES ('MLT FA', 'Management de la logistique et des transports');
 
@@ -24,10 +29,12 @@ INSERT INTO lycee(nom,codepostal,commune) VALUES ('Ozanam', '59000', 'Lille');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Thérèse d''Avila', '59800', 'Lille');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Averoes', '59000', 'Lille');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Valentine Labbé', '59000', 'Lille');
+INSERT INTO lycee(nom,codepostal,commune) VALUES ('Saint Paul', '59800', 'Lille');
 
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Jean Prouvé', '59463', 'Lomme');
 
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('St Rémi', '59170' ,'Roubaix');
+INSERT INTO lycee(nom,codepostal,commune) VALUES ('St Martin', '59100' ,'Roubaix');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Jean Rostand', '59170' ,'Roubaix');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Jean Moulin', '59170' ,'Roubaix');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Charles Beaudelaire', '59170' ,'Roubaix');
@@ -35,6 +42,7 @@ INSERT INTO lycee(nom,codepostal,commune) VALUES ('Charles Beaudelaire', '59170'
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Colbert', '59200', 'Tourcoing');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Gambetta', '59200', 'Tourcoing');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Sacré Coeur', '59200', 'Tourcoing');
+INSERT INTO lycee(nom,codepostal,commune) VALUES ('Sévigné', '59200', 'Tourcoing');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Eic Tourcoing', '59200', 'Tourcoing');
 
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('du Hainaut', '59300', 'Valenciennes');
@@ -42,6 +50,7 @@ INSERT INTO lycee(nom,codepostal,commune) VALUES ('Henri Wallon', '59300', 'Vale
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Dampierre', '59300', 'Valenciennes');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Watteau', '59300', 'Valenciennes');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('de L''Escaut', '59300', 'Valenciennes');
+INSERT INTO lycee(nom,codepostal,commune) VALUES ('La Sagesse', '59300', 'Valenciennes');
 
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Beaudimont', '62000', 'Arras');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Guy Mollet', '62000', 'Arras');
@@ -57,6 +66,8 @@ INSERT INTO lycee(nom,codepostal,commune) VALUES ('Epid', '59140', 'Dunkerque');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Albert Chatelet', '59500', 'Douai');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Jean-Baptiste Corot', '59500', 'Douai');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Edmond Labbé', '59500', 'Douai');
+INSERT INTO lycee(nom,codepostal,commune) VALUES ('Saint Jean', '59500', 'Douai');
+INSERT INTO lycee(nom,codepostal,commune) VALUES ('Deforest De Leward', '59500', 'Douai');
 
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Gustave Eiffel', '59280', 'Armentières');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Paul Hazard', '59280', 'Armentières');
@@ -64,6 +75,7 @@ INSERT INTO lycee(nom,codepostal,commune) VALUES ('Saint Jude', '59280', 'Arment
 
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('André Malraux', '62400', 'Bethune');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Blaringhem', '62400', 'Bethune');
+INSERT INTO lycee(nom,codepostal,commune) VALUES ('Saint Dominique', '62400', 'Bethune');
 
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Fenelon', '59400', 'Cambrai');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Saint Luc', '59400', 'Cambrai');
@@ -81,6 +93,8 @@ INSERT INTO lycee(nom,codepostal,commune) VALUES ('Jean Perrin', '59130', 'Lambe
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Sainte Odile', '59130', 'Lambersart');
 
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Edouard Branly', '62200', 'Boulogne');
+INSERT INTO lycee(nom,codepostal,commune) VALUES ('Mariette', '62200', 'Boulogne');
+
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Sainte Marie', '59134', 'Beaucamp Ligny');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Saint Paul', '62300', 'Lens');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Marguerite de Flandre', '59147', 'Gondecourt');
@@ -94,6 +108,10 @@ INSERT INTO lycee(nom,codepostal,commune) VALUES ('Voltaire', '62410', 'Wingles'
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Anatole France', '62190', 'Lillers');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Blaise Pascal', '62967', 'Longuenesse');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Emile Zola', '59150', 'Wattrelos');
+INSERT INTO lycee(nom,codepostal,commune) VALUES ('Eugène Woillez', '62170', 'Montreuil-sur-mer');
+INSERT INTO lycee(nom,codepostal,commune) VALUES ('CNED', '62100', 'Calais');
+INSERT INTO lycee(nom,codepostal,commune) VALUES ('Diderot', '62220', 'Carvin');
+INSERT INTO lycee(nom,codepostal,commune) VALUES ('Vauban', '62120', 'Aire sur la Lys');
 
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Université du Littoral', '62200', 'Boulogne sur Mer');
 INSERT INTO lycee(nom,codepostal,commune) VALUES ('Université d''Artois', '62000', 'Arras');
